@@ -11,8 +11,19 @@ namespace LucidVM.Monitor
 
         private static string[] MonitorServerCodebook = new string[]
         {
-            "nop",
+            "ping",
+            "sync",
+            "rect",
+            "resize",
+            "cursor",
+            "mouse",
+            "key",
+            "tunnel",
+            "cap",
+            "auth",
+            "list",
             "connect",
+            "disconnect",
             "reset",
             "file"
         };
@@ -31,7 +42,14 @@ namespace LucidVM.Monitor
                         {
                             IMachine machine = Machines[ctx.Channel];
                             VNCInfo info = machine.GetVNCInfo();
-                            ctx.Send("connect", false, info.Address, info.Port, info.Password);
+                            ctx.Send("connect", false);
+                            string basevnc = $"vnc://{info.Address}:{info.Port}";
+                            if (info.Password != null)
+                            {
+                                basevnc += $"#{info.Password}";
+                            }
+                            ctx.Send("cap", "reset", "file");
+                            ctx.Send("tunnel", "vnc", basevnc);
                         }
                         else
                         {

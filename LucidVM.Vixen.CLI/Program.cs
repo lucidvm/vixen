@@ -17,6 +17,8 @@ namespace LucidVM.Vixen.CLI
 
         static void Main(string[] args)
         {
+            Console.Title = "Vixen Monitor";
+
             try
             {
                 string xmlpath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "vixen.xml");
