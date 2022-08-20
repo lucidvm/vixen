@@ -1,4 +1,4 @@
-# Vixen
+# vixen
 
 A LucidVM monitor written in C# and targeting **VMware hypervisors** via the VIX API.
 
